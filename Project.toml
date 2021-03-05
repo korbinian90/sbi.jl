@@ -1,0 +1,13 @@
+name = "sbi"
+uuid = "05b69fac-29c4-4945-87f7-1fa205a75fc6"
+authors = ["Korbinian Eckstein korbinian90@gmail.com"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

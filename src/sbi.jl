@@ -1,5 +1,7 @@
 module sbi
 
-# Write your package code here.
+using Distributions
+
+include("snle.jl")
 
 end

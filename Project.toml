@@ -3,6 +3,9 @@ uuid = "05b69fac-29c4-4945-87f7-1fa205a75fc6"
 authors = ["Korbinian Eckstein korbinian90@gmail.com"]
 version = "0.1.0"
 
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+
 [compat]
 julia = "1"
 

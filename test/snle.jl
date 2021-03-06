@@ -1,1 +1,3 @@
-snle(1, 1, 1)
+@testset "SNLE" begin
+    snle(1, 1, 1, 1)
+end

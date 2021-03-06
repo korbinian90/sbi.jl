@@ -1,4 +1,4 @@
-function snle(pθ, R, qψ)
+function snle(pθ, qψ, R, N)
     prθx0 = pθ
     D = []
     for r in 1:R

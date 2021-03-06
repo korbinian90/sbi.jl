@@ -1,5 +1,4 @@
-using sbi
-using Test
+include("setup.jl")
 
 @testset "sbi.jl" begin
     include("snle.jl")

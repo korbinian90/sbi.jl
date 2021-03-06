@@ -1,2 +1,3 @@
-using sbi
 using Test
+using sbi
+using Distributions

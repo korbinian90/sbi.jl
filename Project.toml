@@ -4,7 +4,10 @@ authors = ["Korbinian Eckstein korbinian90@gmail.com"]
 version = "0.1.0"
 
 [deps]
+Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
+Turing = "fce5fe82-541a-59a6-adf8-730c64b5f9a0"
 
 [compat]
 julia = "1"

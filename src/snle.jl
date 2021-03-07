@@ -1,26 +1,24 @@
-# from DOI xxx, function xxx
-function snle(pθ, qψ=1, R=1, N=1)
-    prθx0 = pθ
+# from https://arxiv.org/abs/2101.04653, Appendix A4
+function snle(simulator, prior, qψ=1, R=1, N=1)
+    posterior = prior
     D = []
     for r in 1:R
-        for n in 1:N
-            θn = sample(prθx0) # Distributions.sampler?
-            xn = simulate(θn)
-            push!(D, (θn, xn))
-        end
+        θ = sample(posterior, N)
+        x = simulate(simulator, θ)
+        push!(D, (θ, x))
         train!(qψ, D)
-        prθx0 = qψ * pθ
+        posterior = qψ * prior
     end
-    return prθx0, qψ
+    return posterior, qψ
 end
 
-function sample(p)
-    θ = rand(p)
+function sample(p, N)
+    θ = rand(p, (N,)) # Distributions.sampler? MCMC
     return θ
 end
 
-function simulate(θ)
-    x = 1
+function simulate(simulator, θ)
+    x = simulator.(θ)
     return x
 end
 

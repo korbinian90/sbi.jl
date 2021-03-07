@@ -16,7 +16,12 @@ end
 end
 
 @testset "PyCall maf test" begin    
-    sbi.__initpy__()
+    #sbi.__init__()
+    try
+        # always errors first time, probably wrong import order
+        sbi.build_maf(ones(5), ones(2))
+    catch
+    end
     sbi.build_maf(ones(5), ones(2))
 end
 

@@ -35,27 +35,18 @@ end
     snle(simulator, pθ, qψ, 2, nbatch)
 end
 
-@testset "tests" begin
-    using PyCall
+@testset "test log_prob" begin
     N = 50
-    pθ = Uniform(-2, 2)
-    simulator(θ) = 1.0 .+ θ .+ 0.1 .* randn(size(θ))
-    nbatch_x, nbatch_y = N, N
-    qψ = sbi.build_maf(ones(nbatch_x), ones(nbatch_y))
-   
-    sbi.log_prob(qψ, ones(Float32, (N,1)), ones(Float32, (N,1)))
+    qψ = sbi.build_maf(ones(N), ones(N))
+    sbi.log_prob(qψ, ones(Float32, (N,1)), ones(Float32, (N,1)))    
+end
 
-    D = sbi.Data(ones(nbatch_x,1), ones(nbatch_y,1))
-    torch = pyimport("torch")
-    data = pyimport("torch.utils").data
-    dataset = data.TensorDataset(torch.Tensor(D.θ), torch.Tensor(D.x))
-    train_loader = data.DataLoader(dataset; batch_size=50, drop_last=true)
-    optimizer = torch.optim.Adam(qψ.maf.parameters())
-    for batch in train_loader
-        optimizer.zero_grad()
-        log_prob = qψ.maf.log_prob(batch[1], context=batch[2])
-        loss = -torch.mean(log_prob)
-        loss.backward()
-        optimizer.step()
-    end
+@testset "test training" begin
+    N = 50
+    qψ = sbi.build_maf(ones(N), ones(N))
+    D = sbi.Data(ones(N,1), ones(N,1))
+    p1 = convert(Float64, collect(qψ.maf.parameters())[10][10])
+    sbi.train!(qψ, D)
+    p2 = convert(Float64, collect(qψ.maf.parameters())[10][10])
+    @test p1 != p2
 end
